@@ -1,16 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette (approximated from the Figma design — swap for exact tokens if provided) */
   --color-ink: #0a0a0a;
   --color-ink-soft: #171717;
   --color-paper: #ededed;
   --color-paper-soft: #f6f6f6;
   --color-cream: #ffffff;
-  --color-accent: #ff4b1f;
+  --color-accent: #ff4d00;
   --color-accent-soft: #ff7a4d;
   --color-line: rgba(255, 255, 255, 0.12);
   --color-line-dark: rgba(10, 10, 10, 0.12);
+
+  /* Button surfaces (measured from Figma): flat fill + radial sheen + inner shadows */
+  --color-btn-dark: #000000;
+  --color-btn-dark-sheen: #bebebe;
+  --color-btn-light: #f8f8f8;
+  --color-btn-light-sheen: #000000;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -77,6 +82,38 @@ body {
       font-size: 1.25rem;
     }
   }
+}
+
+/* Glossy button surface: flat fill + subtle radial sheen + inner shadows (measured from Figma) */
+.btn-sheen {
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.btn-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(120% 140% at 20% 0%, var(--btn-sheen-color), transparent 70%);
+  mix-blend-mode: overlay;
+}
+
+.btn-sheen-dark {
+  background-color: var(--color-btn-dark);
+  --btn-sheen-color: var(--color-btn-dark-sheen);
+  color: var(--color-cream);
+}
+
+.btn-sheen-light {
+  background-color: var(--color-btn-light);
+  --btn-sheen-color: var(--color-btn-light-sheen);
+  color: var(--color-ink);
 }
 
 /* Visible, on-brand focus ring for keyboard navigation (accessibility requirement) */

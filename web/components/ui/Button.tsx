@@ -2,12 +2,14 @@ import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 import { cx } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "active";
+type Variant = "dark" | "light" | "outline" | "active";
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    "bg-cream text-ink hover:bg-accent hover:text-cream",
-  secondary:
+  // Black pill w/ radial sheen + inner shadow — the "Contact Us" button from the nav
+  dark: "btn-sheen btn-sheen-dark hover:brightness-125",
+  // Off-white pill w/ radial sheen + inner shadow — the light counterpart
+  light: "btn-sheen btn-sheen-light hover:brightness-95",
+  outline:
     "bg-transparent text-cream border border-line hover:border-accent hover:text-accent",
   active: "bg-accent text-cream hover:bg-accent-soft",
 };
@@ -27,7 +29,7 @@ type ButtonAsLink = CommonProps &
   AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
 
 export function Button({
-  variant = "primary",
+  variant = "dark",
   className,
   href,
   ...props

@@ -25,7 +25,7 @@ export function ContactModal({ contactEmail }: { contactEmail?: string }) {
 
   return (
     <>
-      <Button variant="active" onClick={open}>
+      <Button variant="dark" onClick={open}>
         Contact Us
       </Button>
       <dialog
