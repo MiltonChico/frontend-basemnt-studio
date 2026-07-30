@@ -32,6 +32,13 @@ const variantClasses: Record<Variant, string> = {
 const base =
   "inline-flex items-center justify-center gap-2 font-mono uppercase transition-colors duration-150";
 
+// Exposes the same visual classes the real <Button> renders with, for cases that need a
+// button's *look* without its semantics — e.g. a decorative CTA label inside a card that's
+// already one big <Link> (nesting an interactive element there would be invalid HTML/a11y).
+export function buttonClassName(variant: Variant = "main", className?: string) {
+  return cx(base, variantClasses[variant], className);
+}
+
 type CommonProps = {
   variant?: Variant;
   className?: string;
@@ -49,7 +56,7 @@ export function Button({
   href,
   ...props
 }: ButtonAsButton | ButtonAsLink) {
-  const classes = cx(base, variantClasses[variant], className);
+  const classes = buttonClassName(variant, className);
 
   if (href) {
     return (

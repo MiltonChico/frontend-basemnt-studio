@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PostCard } from "./PostCard";
+import { Button } from "@/components/ui/Button";
 import type { Category, PostSummary } from "@/lib/sanity/types";
 import { cx } from "@/lib/utils";
 
@@ -46,11 +47,13 @@ export function PostGrid({
   }
 
   return (
-    <section className="bg-paper px-6 py-16 text-ink">
+    // pt-0 at sm+: the gap above this section is owned entirely by BlogHero's pb-[286px]
+    // (see BlogHero.tsx) — stacking a second top padding here reproduced the oversized gap.
+    <section className="bg-paper px-6 pt-16 pb-16 text-ink sm:pt-0">
       <div className="mx-auto max-w-6xl">
-        <h2 className="max-w-md text-h2 font-semibold">{heading}</h2>
+        <h2 className="max-w-2xl text-h1 font-semibold">{heading}</h2>
 
-        <div role="group" aria-label="Filter posts by category" className="mt-8 flex flex-wrap gap-6">
+        <div role="group" aria-label="Filter posts by category" className="mt-8 flex flex-wrap gap-10">
           <FilterButton
             active={activeCategory === ALL}
             onClick={() => selectCategory(ALL)}
@@ -68,7 +71,7 @@ export function PostGrid({
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post) => (
             <PostCard key={post._id} post={post} />
           ))}
@@ -80,13 +83,13 @@ export function PostGrid({
 
         {hasMore && (
           <div className="mt-10 flex justify-center">
-            <button
+            <Button
               type="button"
+              variant="main"
               onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
-              className="rounded-full bg-ink px-6 py-3 text-label font-mono uppercase text-cream hover:bg-accent"
             >
               Load more
-            </button>
+            </Button>
           </div>
         )}
       </div>
