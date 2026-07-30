@@ -23,8 +23,6 @@ export type SocialLink = {
 export type SiteSettings = {
   title?: string;
   blogHero?: string;
-  // Array fields Sanity has never touched come back as `null`, not `undefined` —
-  // components consuming these must guard with `?? []`, not a default parameter.
   navLinks?: NavLink[] | null;
   contactEmail?: string;
   footerColumns?: FooterColumn[] | null;
@@ -74,12 +72,8 @@ export type PostSummary = {
 
 export type Post = PostSummary & {
   subtitle?: string;
-  // Full-length lead paragraph for the detail header — kept separate from `description`
-  // (the card teaser) since one gets clamped and the other needs its full length.
   intro?: string;
   authors?: Author[];
-  // `body` blocks are either standard Portable Text blocks/images, or the custom
-  // `pullQuote` object — components consuming this should switch on `_type`.
   body?: (PortableTextBlock | PullQuote)[];
   displayNumber?: number;
   previousPost?: PostSummary | null;

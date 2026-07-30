@@ -6,6 +6,7 @@ import type { NavLink } from "@/lib/sanity/types";
 
 export function MobileMenu({ navLinks }: { navLinks: NavLink[] }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
 
   function toggle() {
@@ -14,6 +15,7 @@ export function MobileMenu({ navLinks }: { navLinks: NavLink[] }) {
     } else {
       dialogRef.current?.showModal();
       setOpen(true);
+      navRef.current?.focus();
     }
   }
 
@@ -39,16 +41,18 @@ export function MobileMenu({ navLinks }: { navLinks: NavLink[] }) {
         onClick={(event) => {
           if (event.target === dialogRef.current) dialogRef.current?.close();
         }}
+        aria-label="Site menu"
         className="m-0 h-full max-h-none w-full max-w-none border-none bg-ink p-0 text-cream backdrop:bg-ink/90"
       >
         <nav
+          ref={navRef}
+          tabIndex={-1}
           aria-label="Mobile"
           className="flex h-full flex-col items-start justify-center gap-6 px-8"
         >
           <button
             type="button"
             onClick={() => dialogRef.current?.close()}
-            aria-label="Close menu"
             className="absolute right-6 top-6 font-mono text-label"
           >
             CLOSE

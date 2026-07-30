@@ -13,41 +13,32 @@ export function PostCard({ post }: { post: PostSummary }) {
   const ctaLabel = post.ctaLabel ?? "Read more";
 
   return (
-    // Only the CTA button below is a link — image/title/tags/excerpt are presentational.
-    // A card-wide link is easy to misclick and gives every card an identical, ambiguous
-    // accessible name; one clearly-labelled link per card is unambiguous for screen
-    // reader and keyboard users, at the cost of a slightly smaller click target.
     <article className="flex flex-col overflow-hidden rounded-2xl bg-[rgba(252,252,252,0.25)] text-ink">
-      {/* Source images are wide banner-style crops, not 4:3 — matching the container's
-          aspect ratio to the Sanity crop request avoids a double-crop that clips the sides */}
       <div className="relative aspect-[2.9/1] w-full overflow-hidden bg-ink-soft">
         {post.mainImage && (
           <Image
             src={urlFor(post.mainImage).width(640).height(220).url()}
             alt={post.mainImage.alt ?? post.title}
             fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 457px, (min-width: 640px) 50vw, 100vw"
             className="object-cover"
           />
         )}
       </div>
       <div className="flex flex-col gap-2 p-4">
-        <p className="text-caption font-mono text-ink/60">
+        <p className="text-caption font-mono text-ink/70">
           <time dateTime={post.publishedAt}>{date}</time>
         </p>
         <h3 className="text-h3 font-semibold">{post.title}</h3>
         {post.categories && post.categories.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {post.categories.map((category) => (
-              <Tag key={category._id} flat className="bg-[#e6e6e6] text-[#c4c4c4]">
+              <Tag key={category._id} flat className="bg-[#e6e6e6] text-ink/70">
                 {category.title}
               </Tag>
             ))}
           </div>
         )}
-        {/* Visible label stays short ("Read more"), but the accessible name includes the
-            post title — otherwise a screen reader user tabbing through the grid hits a
-            list of identical "Read more" links with no way to tell them apart. */}
         <Button
           href={`/blog/${post.slug}`}
           variant="secondaryLight"

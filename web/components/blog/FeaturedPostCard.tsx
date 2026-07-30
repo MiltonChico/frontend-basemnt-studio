@@ -29,7 +29,7 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
         </div>
       )}
       <div className="flex flex-col justify-center gap-4 p-2 sm:w-[325px] sm:shrink-0">
-        <p className="text-caption font-mono text-cream/60">
+        <p className="text-caption font-mono text-muted-strong">
           <time dateTime={post.publishedAt}>{date}</time>
         </p>
         <h2 className="text-h2 font-semibold leading-snug">{post.title}</h2>
@@ -42,10 +42,7 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
             ))}
           </div>
         )}
-        {post.description && <p className="text-body font-normal text-cream/70">{post.description}</p>}
-        {/* Visible label stays short, but the accessible name includes the post title —
-            otherwise a screen reader user has no way to distinguish this link from every
-            other "Read full blog post" link on the page. */}
+        {post.description && <p className="text-body font-normal text-muted">{post.description}</p>}
         <Button
           href={`/blog/${post.slug}`}
           variant="secondaryAccent"

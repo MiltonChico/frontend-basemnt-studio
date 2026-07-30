@@ -51,9 +51,6 @@ export const blockContent = defineType({
       ],
     }),
     defineArrayMember({
-      // Embedded object, not a `> ` markdown blockquote — attributionName/attributionRole
-      // need to stay as separate data (not baked into one text string) so the front end
-      // can style the name and role independently, per the Figma pull-quote component.
       type: 'object',
       name: 'pullQuote',
       title: 'Pull quote',

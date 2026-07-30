@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { getSiteSettings } from "@/lib/sanity/queries";
+import { siteUrl } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,13 +16,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const defaultTitle =
+  "basement. — Research, insights & the science behind building brands & websites.";
+const defaultDescription =
+  "Research, insights, and the science behind building brands & websites.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "basement. — Research, insights & the science behind building brands & websites.",
+    default: defaultTitle,
     template: "%s — basement.",
   },
-  description:
-    "Research, insights, and the science behind building brands & websites.",
+  description: defaultDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "basement.",
+    title: defaultTitle,
+    description: defaultDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+  },
 };
 
 export default async function RootLayout({
@@ -45,7 +66,7 @@ export default async function RootLayout({
           navLinks={siteSettings?.navLinks}
           contactEmail={siteSettings?.contactEmail}
         />
-        <main id="main-content" className="flex-1">
+        <main id="main-content" tabIndex={-1} className="flex-1">
           {children}
         </main>
         <Footer

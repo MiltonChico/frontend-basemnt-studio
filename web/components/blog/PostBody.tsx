@@ -29,9 +29,9 @@ const components: PortableTextComponents = {
       <div className="relative my-8 aspect-video w-full overflow-hidden rounded-xl">
         <Image
           src={urlFor(value).width(1200).height(675).url()}
-          alt={value.alt ?? ""}
+          alt={value.alt ?? "Article image"}
           fill
-          sizes="(min-width: 1024px) 800px, 100vw"
+          sizes="(min-width: 768px) 768px, 100vw"
           className="object-cover"
         />
       </div>
@@ -40,7 +40,7 @@ const components: PortableTextComponents = {
       <blockquote className="my-10 border-l-2 border-accent pl-6">
         <p className="text-2xl font-semibold leading-snug">“{value.quote}”</p>
         {(value.attributionName || value.attributionRole) && (
-          <footer className="mt-3 text-label font-mono text-cream/60">
+          <footer className="mt-3 text-label font-mono text-muted-strong">
             {value.attributionName}
             {value.attributionRole ? `, ${value.attributionRole}` : ""}
           </footer>

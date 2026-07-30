@@ -1,5 +1,11 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/layout/Container";
 import type { PostSummary } from "@/lib/sanity/types";
+
+function shortTitle(title: string) {
+  const [head] = title.split(":");
+  return head.trim();
+}
 
 export function PostPagination({
   previous,
@@ -11,30 +17,42 @@ export function PostPagination({
   if (!previous && !next) return null;
 
   return (
-    <nav
-      aria-label="Post navigation"
-      className="mx-auto flex max-w-5xl items-center justify-between gap-4 border-t border-line px-6 py-8 text-label font-mono text-cream/70"
-    >
-      {previous ? (
-        <Link
-          href={`/blog/${previous.slug}`}
-          className="rounded-full border border-line px-4 py-2 hover:border-accent hover:text-accent"
-        >
-          ← {previous.title}
-        </Link>
-      ) : (
-        <span />
-      )}
-      {next ? (
-        <Link
-          href={`/blog/${next.slug}`}
-          className="rounded-full border border-line px-4 py-2 hover:border-accent hover:text-accent"
-        >
-          {next.title} →
-        </Link>
-      ) : (
-        <span />
-      )}
+    <nav aria-label="Post navigation" className="bg-ink text-cream">
+      <Container className="flex items-center justify-between gap-8 py-8">
+        {previous ? (
+          <div className="flex items-center gap-4">
+         
+            <Button
+              href={`/blog/${previous.slug}`}
+              variant="secondaryGrey"
+              aria-label={`Previous: ${previous.title}`}
+            >
+              Previous
+            </Button>
+            <span className="text-label font-mono uppercase tracking-tight text-cream">
+              {shortTitle(previous.title)}
+            </span>
+          </div>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <div className="flex items-center gap-4">
+            <span className="text-label font-mono uppercase tracking-tight text-cream">
+              {shortTitle(next.title)}
+            </span>
+            <Button
+              href={`/blog/${next.slug}`}
+              variant="secondaryGrey"
+              aria-label={`Next: ${next.title}`}
+            >
+              Next
+            </Button>
+          </div>
+        ) : (
+          <span />
+        )}
+      </Container>
     </nav>
   );
 }

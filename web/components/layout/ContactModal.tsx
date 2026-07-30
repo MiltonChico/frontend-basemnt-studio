@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/Button";
 
 export function ContactModal({ contactEmail }: { contactEmail?: string }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const [submitted, setSubmitted] = useState(false);
 
   function open() {
     setSubmitted(false);
     dialogRef.current?.showModal();
+    titleRef.current?.focus();
   }
 
   function close() {
@@ -18,8 +20,6 @@ export function ContactModal({ contactEmail }: { contactEmail?: string }) {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Mocked submission: the challenge is scoped to the frontend/CMS, not a
-    // backend mail service, so we simulate a success state instead of sending.
     setSubmitted(true);
   }
 
@@ -39,21 +39,25 @@ export function ContactModal({ contactEmail }: { contactEmail?: string }) {
       >
         <div className="p-6">
           <div className="mb-6 flex items-start justify-between">
-            <h2 id="contact-modal-title" className="text-h3 font-semibold">
+            <h2
+              id="contact-modal-title"
+              ref={titleRef}
+              tabIndex={-1}
+              className="text-h3 font-semibold"
+            >
               Contact us
             </h2>
             <button
               type="button"
               onClick={close}
-              aria-label="Close contact form"
-              className="font-mono text-label text-cream/70 hover:text-accent"
+              className="font-mono text-label text-muted hover:text-accent"
             >
               ESC / CLOSE
             </button>
           </div>
 
           {submitted ? (
-            <p role="status" className="text-body text-cream/80">
+            <p role="status" className="text-body text-muted-strong">
               Thanks — your message is on its way{contactEmail ? ` to ${contactEmail}` : ""}. We&apos;ll get back to you soon.
             </p>
           ) : (
@@ -64,7 +68,7 @@ export function ContactModal({ contactEmail }: { contactEmail?: string }) {
                   required
                   name="name"
                   type="text"
-                  className="rounded-md border border-line bg-ink px-3 py-2 text-body text-cream outline-none focus-visible:border-accent"
+                  className="rounded-md border border-line bg-ink px-3 py-2 text-body text-cream"
                 />
               </label>
               <label className="flex flex-col gap-1.5 text-label font-mono">
@@ -73,7 +77,7 @@ export function ContactModal({ contactEmail }: { contactEmail?: string }) {
                   required
                   name="email"
                   type="email"
-                  className="rounded-md border border-line bg-ink px-3 py-2 text-body text-cream outline-none focus-visible:border-accent"
+                  className="rounded-md border border-line bg-ink px-3 py-2 text-body text-cream"
                 />
               </label>
               <label className="flex flex-col gap-1.5 text-label font-mono">
@@ -82,7 +86,7 @@ export function ContactModal({ contactEmail }: { contactEmail?: string }) {
                   required
                   name="message"
                   rows={4}
-                  className="resize-none rounded-md border border-line bg-ink px-3 py-2 text-body text-cream outline-none focus-visible:border-accent"
+                  className="resize-none rounded-md border border-line bg-ink px-3 py-2 text-body text-cream"
                 />
               </label>
               <Button type="submit" variant="active" className="mt-2 w-full">

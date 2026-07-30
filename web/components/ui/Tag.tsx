@@ -18,7 +18,7 @@ export function Tag({
         flat
           ? "inline-flex items-center px-[2px] text-caption font-semibold leading-none"
           : "inline-flex items-center rounded-full px-2.5 py-1 text-caption font-semibold uppercase",
-        !className && (active ? "bg-accent text-cream" : "bg-ink-soft text-cream/70"),
+        !className && (active ? "bg-accent text-cream" : "bg-ink-soft text-muted"),
         className,
       )}
     >

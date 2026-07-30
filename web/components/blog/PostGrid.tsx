@@ -48,7 +48,6 @@ export function PostGrid({
   }
 
   return (
-    // pt-0 at sm+: the gap above this section is owned entirely by BlogHero's pb-[286px]
     <section className="bg-paper pt-16 pb-16 text-ink sm:pt-0">
       <Container>
         <h2 className="max-w-2xl text-h1 font-semibold pt-24 pb-32">{heading}</h2>
@@ -78,7 +77,7 @@ export function PostGrid({
         </div>
 
         {visiblePosts.length === 0 && (
-          <p className="mt-10 text-body text-ink/60">No posts in this category yet.</p>
+          <p className="mt-10 text-body text-ink/70">No posts in this category yet.</p>
         )}
 
         {hasMore && (
@@ -112,7 +111,7 @@ function FilterButton({
       onClick={onClick}
       aria-pressed={active}
       className={cx(
-        "text-label font-mono uppercase tracking-tight text-ink/50 hover:text-ink",
+        "text-label font-mono uppercase tracking-tight text-ink/70 hover:text-ink",
         active && "text-ink underline underline-offset-4",
       )}
     >

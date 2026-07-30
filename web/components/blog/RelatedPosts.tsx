@@ -28,14 +28,14 @@ export function RelatedPosts({ posts }: { posts: PostSummary[] }) {
                   <div className="relative aspect-[2.9/1] w-full overflow-hidden rounded-xl bg-ink-soft">
                     <Image
                       src={urlFor(post.mainImage).width(480).height(165).url()}
-                      alt={post.mainImage.alt ?? ""}
+                      alt={post.mainImage.alt ?? post.title}
                       fill
-                      sizes="(min-width: 640px) 33vw, 100vw"
+                      sizes="(min-width: 640px) 341px, 100vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                 )}
-                <p className="text-caption font-mono text-cream/50">{date}</p>
+                <p className="text-caption font-mono text-muted-strong">{date}</p>
                 <h3 className="text-body font-semibold leading-snug group-hover:text-accent">
                   {post.title}
                 </h3>

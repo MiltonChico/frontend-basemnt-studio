@@ -18,11 +18,12 @@ export function BlogHero({
 
       {featuredPost && (
         <Container className="relative mt-24 flow-root">
-          <div
+          <img
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-[480px] w-full rounded-full bg-accent/40 blur-[140px]"
+            alt=""
+            src="/hero-glow.svg"
+            className="pointer-events-none absolute left-1/2 top-0 w-[2448px] max-w-none -translate-x-1/2 select-none"
           />
-
 
           <div className="relative mt-[198px]">
             <FeaturedPostCard post={featuredPost} />

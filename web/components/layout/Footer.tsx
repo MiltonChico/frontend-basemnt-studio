@@ -24,8 +24,6 @@ export function Footer({
 
   return (
     <footer className="border-t border-line bg-ink text-cream">
-      {/* gap-x is the property controlling the horizontal space between columns —
-          bumped from 16 (64px) to 24 (96px) at sm+ per request. */}
       <Container className="flex flex-wrap gap-x-12 gap-y-8 pt-10 sm:gap-x-24 sm:pt-12">
         {allColumns.map((column) => (
           <div key={column.title} className="flex flex-col gap-3.5 sm:gap-4">
@@ -48,10 +46,6 @@ export function Footer({
         ))}
       </Container>
 
-      {/* Full-bleed edge-to-edge on mobile (per Figma), constrained to the shared
-          Container from sm+ up — the only spot in the footer where mobile deliberately
-          does NOT match desktop's container width. mt-8/sm:mt-4: mobile gets more room
-          above the wordmark than desktop, which had none before. */}
       <div className="mt-8 overflow-hidden pb-2 sm:mx-auto sm:mt-4 sm:w-full sm:max-w-[1372px] sm:px-4 sm:pb-16" aria-hidden="true">
         <Image
           src="/footer-wordmark.svg"
@@ -62,9 +56,7 @@ export function Footer({
         />
       </div>
 
-      <Container className="mt-2 flex flex-row flex-wrap items-center justify-between gap-4 pb-6 text-[9px] font-mono uppercase tracking-tight text-cream/40">
-        {/* Explicit <br/> matches Figma's forced two-line break, not just narrow-width
-            wrap ("© basement.studio LLC 2026." / "All rights reserved."). */}
+      <Container className="mt-2 flex flex-row flex-wrap items-center justify-between gap-4 pb-6 text-[9px] font-mono uppercase tracking-tight text-muted-strong">
         <p>
           © {copyrightHolder} {new Date().getFullYear()}.
           <br />

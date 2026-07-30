@@ -31,7 +31,7 @@ export function PostHeader({ post }: { post: Post }) {
             {post.description && (
               <p className="text-h3">{post.description}</p>
             )}
-            {post.intro && <p className="text-body text-cream/70">{post.intro}</p>}
+            {post.intro && <p className="text-body text-muted">{post.intro}</p>}
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export function PostHeader({ post }: { post: Post }) {
           <div className="relative mt-8 aspect-[2.9/1] w-full overflow-hidden border border-[rgba(230,230,230,0.2)]">
             <Image
               src={urlFor(post.mainImage).width(1600).height(552).url()}
-              alt={post.mainImage.alt ?? ""}
+              alt={post.mainImage.alt ?? post.title}
               fill
               sizes="(min-width: 1024px) 1340px, 100vw"
               className="object-cover"
