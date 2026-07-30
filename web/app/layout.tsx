@@ -51,7 +51,8 @@ export default async function RootLayout({
         <Footer
           footerColumns={siteSettings?.footerColumns}
           socialLinks={siteSettings?.socialLinks}
-          wordmark={siteSettings?.title}
+          copyrightHolder={siteSettings?.footerCopyrightHolder}
+          membershipLabel={siteSettings?.footerMembershipLabel}
         />
       </body>
     </html>

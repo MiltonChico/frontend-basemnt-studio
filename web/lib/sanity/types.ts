@@ -28,6 +28,8 @@ export type SiteSettings = {
   navLinks?: NavLink[] | null;
   contactEmail?: string;
   footerColumns?: FooterColumn[] | null;
+  footerCopyrightHolder?: string;
+  footerMembershipLabel?: string;
   socialLinks?: SocialLink[] | null;
 };
 

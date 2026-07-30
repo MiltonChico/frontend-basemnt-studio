@@ -119,7 +119,7 @@ body {
   background-repeat: repeat;
 }
 
-/* Glossy button surface: flat fill + subtle radial sheen + inner shadows (measured from Figma) */
+
 .btn-sheen {
   position: relative;
   isolation: isolate;
@@ -162,7 +162,7 @@ body {
   color: var(--color-ink);
 }
 
-/* Compact flat button surface: small pill, no sheen/shadow (measured from Figma "Secondary Button") */
+
 .btn-compact {
   border-radius: 4px;
   padding: 4px 8px;
@@ -189,7 +189,6 @@ body {
   color: var(--color-cream);
 }
 
-/* Visible, on-brand focus ring for keyboard navigation (accessibility requirement) */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;

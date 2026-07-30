@@ -3,11 +3,7 @@ import { cx } from "@/lib/utils";
 export function Tag({
   children,
   active = false,
-  // "flat" matches the small, unrounded category chip from Figma (bg #2e2e2e or #e6e6e6,
-  // 2px horizontal padding, 13px text) used on post cards — a fully separate class set
-  // rather than an override, since conflicting Tailwind utilities (rounded-full vs
-  // rounded-none, px-2.5 vs px-[2px]) don't reliably cascade in a predictable direction
-  // when merged via string concatenation.
+
   flat = false,
   className,
 }: {

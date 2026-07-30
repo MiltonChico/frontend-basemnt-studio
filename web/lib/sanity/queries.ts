@@ -20,6 +20,8 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
       navLinks,
       contactEmail,
       footerColumns,
+      footerCopyrightHolder,
+      footerMembershipLabel,
       socialLinks
     }`,
     {},

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PostCard } from "./PostCard";
 import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/layout/Container";
 import type { Category, PostSummary } from "@/lib/sanity/types";
 import { cx } from "@/lib/utils";
 
@@ -48,10 +49,9 @@ export function PostGrid({
 
   return (
     // pt-0 at sm+: the gap above this section is owned entirely by BlogHero's pb-[286px]
-    // (see BlogHero.tsx) — stacking a second top padding here reproduced the oversized gap.
-    <section className="bg-paper px-6 pt-16 pb-16 text-ink sm:pt-0">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="max-w-2xl text-h1 font-semibold">{heading}</h2>
+    <section className="bg-paper pt-16 pb-16 text-ink sm:pt-0">
+      <Container>
+        <h2 className="max-w-2xl text-h1 font-semibold pt-24 pb-32">{heading}</h2>
 
         <div role="group" aria-label="Filter posts by category" className="mt-8 flex flex-wrap gap-10">
           <FilterButton
@@ -92,7 +92,7 @@ export function PostGrid({
             </Button>
           </div>
         )}
-      </div>
+      </Container>
     </section>
   );
 }

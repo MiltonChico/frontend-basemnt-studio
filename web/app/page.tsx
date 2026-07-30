@@ -10,7 +10,6 @@ export default async function Home() {
     getSiteSettings(),
   ]);
 
-  console.log(posts)
   const [featuredPost, ...restPosts] = posts;
 
   return (
