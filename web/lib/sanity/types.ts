@@ -23,10 +23,12 @@ export type SocialLink = {
 export type SiteSettings = {
   title?: string;
   blogHero?: string;
-  navLinks?: NavLink[];
+  // Array fields Sanity has never touched come back as `null`, not `undefined` —
+  // components consuming these must guard with `?? []`, not a default parameter.
+  navLinks?: NavLink[] | null;
   contactEmail?: string;
-  footerColumns?: FooterColumn[];
-  socialLinks?: SocialLink[];
+  footerColumns?: FooterColumn[] | null;
+  socialLinks?: SocialLink[] | null;
 };
 
 export type SanityImage = {
@@ -55,6 +57,7 @@ export type PostSummary = {
   excerpt?: string;
   mainImage?: SanityImage;
   publishedAt: string;
+  ctaLabel?: string;
   categories?: Category[];
 };
 

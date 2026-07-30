@@ -2,19 +2,20 @@ import Link from "next/link";
 import type { FooterColumn, SocialLink } from "@/lib/sanity/types";
 
 export function Footer({
-  footerColumns = [],
-  socialLinks = [],
+  footerColumns,
+  socialLinks,
   wordmark = "basement.",
 }: {
-  footerColumns?: FooterColumn[];
-  socialLinks?: SocialLink[];
+  footerColumns?: FooterColumn[] | null;
+  socialLinks?: SocialLink[] | null;
   wordmark?: string;
 }) {
+  const columns = footerColumns ?? [];
+  const social = socialLinks ?? [];
+
   const allColumns: FooterColumn[] = [
-    ...footerColumns,
-    ...(socialLinks.length
-      ? [{ title: "Connect", links: socialLinks }]
-      : []),
+    ...columns,
+    ...(social.length ? [{ title: "Connect", links: social }] : []),
   ];
 
   return (
@@ -28,7 +29,7 @@ export function Footer({
               </h2>
               <ul className="flex flex-col gap-2">
                 {column.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <Link
                       href={link.href}
                       className="text-label font-mono text-cream/80 hover:text-accent"

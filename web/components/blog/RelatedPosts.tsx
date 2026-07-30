@@ -25,9 +25,9 @@ export function RelatedPosts({ posts }: { posts: PostSummary[] }) {
                 className="group flex flex-col gap-3"
               >
                 {post.mainImage && (
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-ink-soft">
+                  <div className="relative aspect-[2.9/1] w-full overflow-hidden rounded-xl bg-ink-soft">
                     <Image
-                      src={urlFor(post.mainImage).width(480).height(360).url()}
+                      src={urlFor(post.mainImage).width(480).height(165).url()}
                       alt={post.mainImage.alt ?? ""}
                       fill
                       sizes="(min-width: 640px) 33vw, 100vw"

@@ -21,13 +21,13 @@ export function NavLinks({
         const isActive = pathname === link.href || pathname?.startsWith(`${link.href}/`);
         return (
           <Link
-            key={link.href}
+            key={link.label}
             href={link.href}
             onClick={onNavigate}
             aria-current={isActive ? "page" : undefined}
             className={
               className ??
-              "text-label font-mono text-cream/80 hover:text-accent aria-[current=page]:text-accent"
+              "text-body font-semibold text-cream/80 hover:text-accent aria-[current=page]:text-accent"
             }
           >
             {link.label}

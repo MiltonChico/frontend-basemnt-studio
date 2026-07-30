@@ -8,5 +8,9 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
+  // The CDN has its own eventually-consistent edge cache on top of our fetch/webhook
+  // revalidation — during active authoring that shows up as "just-published content
+  // missing." Querying the origin API directly keeps things simple and immediately
+  // consistent; our own revalidate route + fetch tags already handle prod freshness.
+  useCdn: false,
 });

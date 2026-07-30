@@ -16,10 +16,12 @@ export function PostCard({ post }: { post: PostSummary }) {
       href={`/blog/${post.slug}`}
       className="group flex flex-col overflow-hidden rounded-xl bg-paper-soft text-ink transition-transform duration-200 hover:-translate-y-1"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink-soft">
+      {/* Source images are wide banner-style crops, not 4:3 — matching the container's
+          aspect ratio to the Sanity crop request avoids a double-crop that clips the sides */}
+      <div className="relative aspect-[2.9/1] w-full overflow-hidden bg-ink-soft">
         {post.mainImage && (
           <Image
-            src={urlFor(post.mainImage).width(640).height(480).url()}
+            src={urlFor(post.mainImage).width(640).height(220).url()}
             alt={post.mainImage.alt ?? ""}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -40,7 +42,7 @@ export function PostCard({ post }: { post: PostSummary }) {
           </div>
         )}
         <span className="mt-2 text-label font-mono text-accent group-hover:underline">
-          Read more
+          {post.ctaLabel ?? "Read more"}
         </span>
       </div>
     </Link>

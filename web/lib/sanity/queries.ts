@@ -8,6 +8,7 @@ const postSummaryProjection = `
   excerpt,
   mainImage,
   publishedAt,
+  ctaLabel,
   categories[]->{_id, title, "slug": slug.current}
 `;
 

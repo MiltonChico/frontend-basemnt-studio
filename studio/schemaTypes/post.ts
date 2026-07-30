@@ -55,6 +55,12 @@ export const post = defineType({
       name: 'body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'ctaLabel',
+      title: 'Card button label',
+      type: 'string',
+      description: 'Text shown on the "read more" button for this post\'s card. Defaults to "Read more" if left empty.',
+    }),
   ],
   preview: {
     select: {title: 'title', media: 'mainImage', date: 'publishedAt'},
