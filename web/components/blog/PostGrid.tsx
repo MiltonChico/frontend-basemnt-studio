@@ -70,9 +70,11 @@ export function PostGrid({
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 flex flex-wrap gap-8">
           {visiblePosts.map((post) => (
-            <PostCard key={post._id} post={post} />
+            <div key={post._id} className="h-[400px] w-[436px] shrink-0">
+              <PostCard post={post} />
+            </div>
           ))}
         </div>
 
