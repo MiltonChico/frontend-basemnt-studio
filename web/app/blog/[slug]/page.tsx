@@ -28,7 +28,7 @@ export async function generateMetadata({
 
   return {
     title: post.title,
-    description: post.excerpt,
+    description: post.description,
     openGraph: post.mainImage
       ? { images: [urlFor(post.mainImage).width(1200).height(630).url()] }
       : undefined,
@@ -46,10 +46,14 @@ export default async function PostPage({
   if (!post) notFound();
 
   const categoryIds = post.categories?.map((category) => category._id) ?? [];
-  const [{ previous, next }, relatedPosts] = await Promise.all([
-    getAdjacentPosts(post.publishedAt, post._id),
-    getRelatedPosts(categoryIds, post._id),
-  ]);
+  const [{ previous: chronologicalPrevious, next: chronologicalNext }, relatedPosts] =
+    await Promise.all([
+      getAdjacentPosts(post.publishedAt, post._id),
+      getRelatedPosts(categoryIds, post._id),
+    ]);
+  
+  const previous = post.previousPost ?? chronologicalPrevious;
+  const next = post.nextPost ?? chronologicalNext;
 
   return (
     <article>

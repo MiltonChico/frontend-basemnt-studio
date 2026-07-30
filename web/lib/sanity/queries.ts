@@ -5,7 +5,7 @@ const postSummaryProjection = `
   _id,
   title,
   "slug": slug.current,
-  excerpt,
+  "description": excerpt,
   mainImage,
   publishedAt,
   ctaLabel,
@@ -57,8 +57,13 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   return client.fetch(
     `*[_type == "post" && slug.current == $slug][0]{
       ${postSummaryProjection},
+      subtitle,
+      intro,
+      displayNumber,
       body,
-      authors[]->{_id, name, role, image}
+      authors[]->{_id, name, role, image, "slug": slug.current},
+      previousPost->{${postSummaryProjection}},
+      nextPost->{${postSummaryProjection}}
     }`,
     { slug },
     { next: { tags: ["post", `post:${slug}`], revalidate: 3600 } },

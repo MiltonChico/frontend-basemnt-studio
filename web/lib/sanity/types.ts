@@ -48,15 +48,24 @@ export type Category = {
 export type Author = {
   _id: string;
   name: string;
+  slug?: string;
   role?: string;
   image?: SanityImage;
+};
+
+export type PullQuote = {
+  _type: "pullQuote";
+  _key: string;
+  quote: string;
+  attributionName?: string;
+  attributionRole?: string;
 };
 
 export type PostSummary = {
   _id: string;
   title: string;
   slug: string;
-  excerpt?: string;
+  description?: string;
   mainImage?: SanityImage;
   publishedAt: string;
   ctaLabel?: string;
@@ -64,6 +73,15 @@ export type PostSummary = {
 };
 
 export type Post = PostSummary & {
+  subtitle?: string;
+  // Full-length lead paragraph for the detail header — kept separate from `description`
+  // (the card teaser) since one gets clamped and the other needs its full length.
+  intro?: string;
   authors?: Author[];
-  body?: PortableTextBlock[];
+  // `body` blocks are either standard Portable Text blocks/images, or the custom
+  // `pullQuote` object — components consuming this should switch on `_type`.
+  body?: (PortableTextBlock | PullQuote)[];
+  displayNumber?: number;
+  previousPost?: PostSummary | null;
+  nextPost?: PostSummary | null;
 };

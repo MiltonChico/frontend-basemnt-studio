@@ -11,6 +11,12 @@ export const author = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      type: 'slug',
+      options: {source: 'name', maxLength: 96},
+      description: 'For a future author page — not consumed by the blog yet.',
+    }),
+    defineField({
       name: 'role',
       type: 'string',
       title: 'Role / title',

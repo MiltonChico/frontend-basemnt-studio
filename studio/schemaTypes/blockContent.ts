@@ -51,22 +51,25 @@ export const blockContent = defineType({
       ],
     }),
     defineArrayMember({
+      // Embedded object, not a `> ` markdown blockquote — attributionName/attributionRole
+      // need to stay as separate data (not baked into one text string) so the front end
+      // can style the name and role independently, per the Figma pull-quote component.
       type: 'object',
-      name: 'quote',
-      title: 'Quote',
+      name: 'pullQuote',
+      title: 'Pull quote',
       fields: [
         defineField({
-          name: 'text',
+          name: 'quote',
           type: 'text',
           title: 'Quote',
           rows: 3,
           validation: (Rule) => Rule.required(),
         }),
-        defineField({name: 'attribution', type: 'string', title: 'Attribution'}),
-        defineField({name: 'role', type: 'string', title: 'Role'}),
+        defineField({name: 'attributionName', type: 'string', title: 'Attribution name'}),
+        defineField({name: 'attributionRole', type: 'string', title: 'Attribution role'}),
       ],
       preview: {
-        select: {title: 'text', subtitle: 'attribution'},
+        select: {title: 'quote', subtitle: 'attributionName'},
       },
     }),
   ],

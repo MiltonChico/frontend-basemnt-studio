@@ -70,6 +70,20 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
+      name: 'footerCopyrightHolder',
+      title: 'Footer copyright holder',
+      type: 'string',
+      initialValue: 'basement.studio LLC',
+      description: 'Rendered as "© {holder} {current year}. All rights reserved." in the footer.',
+    }),
+    defineField({
+      name: 'footerMembershipLabel',
+      title: 'Footer membership label',
+      type: 'string',
+      initialValue: 'Proud member of SoDA',
+      description: 'Small line next to the SoDA badge icon at the bottom of the footer.',
+    }),
+    defineField({
       name: 'socialLinks',
       title: 'Social links',
       type: 'array',

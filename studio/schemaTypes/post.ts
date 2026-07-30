@@ -17,10 +17,27 @@ export const post = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'string',
+      description: 'Short text paired with the title, distinct from the excerpt — e.g. "- The Devex".',
+    }),
+    defineField({
       name: 'excerpt',
+      title: 'Description',
       type: 'text',
       rows: 3,
+      description:
+        'Short teaser used only on post cards (featured + grid). Field is still named "excerpt" internally — renaming it in Sanity would orphan already-published content, so only the Studio label changed; the front end reads it as "description".',
       validation: (Rule) => Rule.max(280),
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro',
+      type: 'text',
+      rows: 4,
+      description:
+        'Longer lead paragraph shown next to the title on the post detail page. Kept separate from the excerpt — one gets clamped on cards, the other needs its full length in the detail header.',
     }),
     defineField({
       name: 'mainImage',
@@ -60,6 +77,29 @@ export const post = defineType({
       title: 'Card button label',
       type: 'string',
       description: 'Text shown on the "read more" button for this post\'s card. Defaults to "Read more" if left empty.',
+    }),
+    defineField({
+      name: 'displayNumber',
+      title: 'Display number',
+      type: 'number',
+      description:
+        'Editorial post number badge (e.g. "60"). Only set this if the number is a deliberate editorial choice, not just this post\'s position in a feed — a computed index wouldn\'t need a field.',
+    }),
+    defineField({
+      name: 'previousPost',
+      title: 'Previous post (override)',
+      type: 'reference',
+      to: {type: 'post'},
+      description:
+        'Manually pins the "Previous" link in the post footer. Leave empty to fall back to the chronologically adjacent post.',
+    }),
+    defineField({
+      name: 'nextPost',
+      title: 'Next post (override)',
+      type: 'reference',
+      to: {type: 'post'},
+      description:
+        'Manually pins the "Next" link in the post footer. Leave empty to fall back to the chronologically adjacent post.',
     }),
   ],
   preview: {
