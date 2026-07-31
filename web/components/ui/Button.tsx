@@ -11,28 +11,50 @@ type Variant =
   | "secondaryLight"
   | "secondaryGrey";
 
-const pill = "rounded-full px-5 py-2.5 text-label tracking-tight";
+type Size = "md" | "lg";
+
+const pillSizes: Record<Size, string> = {
+  md: "rounded-full px-5 py-2.5 text-label tracking-tight",
+  lg: "rounded-full px-8 py-4 text-label tracking-tight",
+};
 const compact = "btn-compact text-button-sm font-medium";
 
-const variantClasses: Record<Variant, string> = {
-  main: `btn-sheen btn-sheen-dark ${pill}`,
-  light: `btn-sheen btn-sheen-light ${pill}`,
-  outline: `bg-transparent text-cream border border-line hover:border-accent hover:text-accent ${pill}`,
-  active: `bg-accent text-cream hover:bg-accent-soft ${pill}`,
-  secondaryAccent: `btn-compact-accent ${compact}`,
-  secondaryLight: `btn-compact-light ${compact}`,
-  secondaryGrey: `btn-compact-grey ${compact}`,
+const pillVariants: Record<"main" | "light" | "outline" | "active", string> = {
+  main: "btn-sheen btn-sheen-dark",
+  light: "btn-sheen btn-sheen-light",
+  outline:
+    "bg-transparent text-cream border border-line hover:border-accent hover:text-accent",
+  active: "bg-accent text-cream hover:bg-accent-soft",
+};
+
+const compactVariants: Record<"secondaryAccent" | "secondaryLight" | "secondaryGrey", string> = {
+  secondaryAccent: "btn-compact-accent",
+  secondaryLight: "btn-compact-light",
+  secondaryGrey: "btn-compact-grey",
 };
 
 const base =
   "inline-flex items-center justify-center gap-2 font-mono uppercase transition-colors duration-150";
 
-export function buttonClassName(variant: Variant = "main", className?: string) {
-  return cx(base, variantClasses[variant], className);
+export function buttonClassName(
+  variant: Variant = "main",
+  className?: string,
+  size: Size = "md",
+) {
+  if (variant in compactVariants) {
+    return cx(base, compactVariants[variant as keyof typeof compactVariants], compact, className);
+  }
+  return cx(
+    base,
+    pillVariants[variant as keyof typeof pillVariants],
+    pillSizes[size],
+    className,
+  );
 }
 
 type CommonProps = {
   variant?: Variant;
+  size?: Size;
   className?: string;
 };
 
@@ -44,11 +66,12 @@ type ButtonAsLink = CommonProps &
 
 export function Button({
   variant = "main",
+  size = "md",
   className,
   href,
   ...props
 }: ButtonAsButton | ButtonAsLink) {
-  const classes = buttonClassName(variant, className);
+  const classes = buttonClassName(variant, className, size);
 
   if (href) {
     return (

@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { PostCard } from "./PostCard";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
@@ -24,6 +26,10 @@ export function PostGrid({
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get("category") ?? ALL;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const animatedIdsRef = useRef<Set<string>>(new Set());
+  const previousCategoryRef = useRef(activeCategory);
+  const previousHasLoadedMoreRef = useRef(false);
 
   const filteredPosts = useMemo(() => {
     if (activeCategory === ALL) return posts;
@@ -35,6 +41,56 @@ export function PostGrid({
   const visiblePosts = filteredPosts.slice(0, visibleCount);
   const hasMore = visibleCount < filteredPosts.length;
   const hasLoadedMore = visibleCount > PAGE_SIZE;
+
+  useGSAP(
+    () => {
+      const isFirstRun = animatedIdsRef.current.size === 0;
+
+      if (previousCategoryRef.current !== activeCategory) {
+        animatedIdsRef.current = new Set();
+        previousCategoryRef.current = activeCategory;
+        previousHasLoadedMoreRef.current = false;
+      }
+
+      const allCards = gsap.utils.toArray<HTMLElement>("[data-post-card]");
+      const newCards = allCards.filter(
+        (card) => !animatedIdsRef.current.has(card.dataset.postId!),
+      );
+      newCards.forEach((card) => animatedIdsRef.current.add(card.dataset.postId!));
+
+      const imagesJustRevealed = !previousHasLoadedMoreRef.current && hasLoadedMore;
+      previousHasLoadedMoreRef.current = hasLoadedMore;
+
+      if (isFirstRun) return;
+
+      if (newCards.length > 0) {
+        gsap.from(newCards, {
+          y: 32,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.12,
+        });
+      }
+
+      if (imagesJustRevealed) {
+        const revealedImages = allCards
+          .filter((card) => !newCards.includes(card))
+          .map((card) => card.querySelector("[data-post-image]"))
+          .filter((image): image is HTMLElement => image !== null);
+
+        if (revealedImages.length > 0) {
+          gsap.from(revealedImages, {
+            opacity: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.12,
+          });
+        }
+      }
+    },
+    { scope: gridRef, dependencies: [visiblePosts.length, activeCategory] },
+  );
 
   function selectCategory(slug: string) {
     setVisibleCount(PAGE_SIZE);
@@ -75,12 +131,14 @@ export function PostGrid({
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-8">
+        <div ref={gridRef} className="mt-16 flex flex-wrap gap-8">
           {visiblePosts.map((post, index) => {
             const showImage = hasLoadedMore || index < 3;
             return (
               <div
                 key={post._id}
+                data-post-card
+                data-post-id={post._id}
                 className={cx(
                   "w-full sm:w-[436px] sm:shrink-0",
                   showImage ? "sm:h-[400px]" : "sm:h-[250px]",
@@ -101,6 +159,7 @@ export function PostGrid({
             <Button
               type="button"
               variant="main"
+              size="lg"
               disabled={!hasMore}
               className="disabled:pointer-events-none disabled:opacity-40"
               onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}

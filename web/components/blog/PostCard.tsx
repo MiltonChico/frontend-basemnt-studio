@@ -60,7 +60,10 @@ export function PostCard({
     >
       <div className="flex w-full flex-col items-start gap-6 pb-6">
         {showImage && post.mainImage && (
-          <div className="relative h-[137px] w-full shrink-0 overflow-hidden rounded-md bg-ink-soft">
+          <div
+            data-post-image
+            className="relative h-[137px] w-full shrink-0 overflow-hidden rounded-md bg-ink-soft"
+          >
             <Image
               src={urlFor(post.mainImage).width(436).height(137).url()}
               alt={post.mainImage.alt ?? post.title}

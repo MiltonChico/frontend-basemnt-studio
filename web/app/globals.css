@@ -44,6 +44,13 @@
   --text-caption: 0.8125rem;
   --text-caption--line-height: 1;
 
+  --text-micro: 14px;
+  --text-micro--line-height: 1.4;
+
+  --text-eyebrow: 14px;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: -0.01em;
+
   --text-button-sm: 14px;
   --text-button-sm--line-height: 0.9;
   --text-button-sm--letter-spacing: -0.01em;
@@ -84,6 +91,15 @@ body {
     line-height: var(--text-button-sm--line-height);
     letter-spacing: var(--text-button-sm--letter-spacing);
   }
+  .text-eyebrow {
+    font-size: var(--text-eyebrow);
+    line-height: var(--text-eyebrow--line-height);
+    letter-spacing: var(--text-eyebrow--letter-spacing);
+  }
+  .text-micro {
+    font-size: var(--text-micro);
+    line-height: var(--text-micro--line-height);
+  }
 
   @media (max-width: 768px) {
     .text-h1 {
@@ -94,6 +110,12 @@ body {
     }
     .text-h3 {
       font-size: 1.25rem;
+    }
+    .text-eyebrow {
+      font-size: 12px;
+    }
+    .text-micro {
+      font-size: 9px;
     }
   }
 }
