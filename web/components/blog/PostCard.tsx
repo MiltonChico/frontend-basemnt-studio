@@ -25,7 +25,7 @@ const toneStyles: Record<
     button: "secondaryLight",
   },
   dark: {
-    card: "text-cream",
+    card: "border border-line bg-ink-soft text-cream",
     padding: "p-4",
     date: "text-muted-strong",
     tag: "bg-[#2e2e2e] text-[#c4c4c4]",
@@ -58,7 +58,7 @@ export function PostCard({
         s.card,
       )}
     >
-      <div className="flex w-full flex-col items-start gap-6">
+      <div className="flex w-full flex-col items-start gap-6 pb-6">
         {showImage && post.mainImage && (
           <div className="relative h-[137px] w-full shrink-0 overflow-hidden rounded-md bg-ink-soft">
             <Image

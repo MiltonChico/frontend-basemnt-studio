@@ -95,7 +95,7 @@ export default async function PostPage({
       />
       <article>
         <PostHeader post={post} />
-        <div className="mx-auto max-w-3xl bg-ink px-6 pb-16 text-cream">
+        <div className="mx-auto max-w-[904px] bg-ink px-6 pb-16 text-cream">
           {post.body && <PostBody value={post.body} />}
         </div>
       </article>

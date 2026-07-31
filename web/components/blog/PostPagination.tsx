@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/layout/Container";
 import type { PostSummary } from "@/lib/sanity/types";
 
 function shortTitle(title: string) {
@@ -18,10 +17,9 @@ export function PostPagination({
 
   return (
     <nav aria-label="Post navigation" className="bg-ink text-cream">
-      <Container className="flex items-center justify-between gap-8 py-8">
+      <div className="mx-auto flex max-w-[904px] items-center justify-between gap-8 px-6 py-8">
         {previous ? (
           <div className="flex items-center gap-4">
-         
             <Button
               href={`/blog/${previous.slug}`}
               variant="secondaryGrey"
@@ -52,7 +50,7 @@ export function PostPagination({
         ) : (
           <span />
         )}
-      </Container>
+      </div>
     </nav>
   );
 }
