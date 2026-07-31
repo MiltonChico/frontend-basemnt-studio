@@ -12,9 +12,9 @@ export function RelatedPosts({ posts }: { posts: PostSummary[] }) {
           <span className="block leading-[0.95]">Related</span>
           <span className="block leading-[0.95]">Posts</span>
         </h2>
-        <div className="mt-8 flex gap-8">
+        <div className="mt-8 flex flex-wrap gap-8">
           {posts.map((post) => (
-            <div key={post._id} className="h-[400px] w-[436px] shrink-0">
+            <div key={post._id} className="w-full sm:h-[400px] sm:w-[436px] sm:shrink-0">
               <PostCard post={post} tone="dark" />
             </div>
           ))}

@@ -34,6 +34,7 @@ export function PostGrid({
 
   const visiblePosts = filteredPosts.slice(0, visibleCount);
   const hasMore = visibleCount < filteredPosts.length;
+  const hasLoadedMore = visibleCount > PAGE_SIZE;
 
   function selectCategory(slug: string) {
     setVisibleCount(PAGE_SIZE);
@@ -48,11 +49,15 @@ export function PostGrid({
   }
 
   return (
-    <section className="bg-paper pt-16 pb-16 text-ink sm:pt-0">
+    <section className="bg-paper pb-16 text-ink">
       <Container>
-        <h2 className="max-w-2xl text-h1 font-semibold pt-24 pb-32">{heading}</h2>
+        <h2 className="max-w-2xl text-h1 font-semibold pt-8 pb-32 sm:pt-24">{heading}</h2>
 
-        <div role="group" aria-label="Filter posts by category" className="mt-8 flex flex-wrap gap-10">
+        <div
+          role="group"
+          aria-label="Filter posts by category"
+          className="mt-8 flex flex-nowrap gap-10 overflow-x-auto scrollbar-hidden"
+        >
           <FilterButton
             active={activeCategory === ALL}
             onClick={() => selectCategory(ALL)}
@@ -71,22 +76,33 @@ export function PostGrid({
         </div>
 
         <div className="mt-10 flex flex-wrap gap-8">
-          {visiblePosts.map((post) => (
-            <div key={post._id} className="h-[400px] w-[436px] shrink-0">
-              <PostCard post={post} />
-            </div>
-          ))}
+          {visiblePosts.map((post, index) => {
+            const showImage = hasLoadedMore || index < 3;
+            return (
+              <div
+                key={post._id}
+                className={cx(
+                  "w-full sm:w-[436px] sm:shrink-0",
+                  showImage ? "sm:h-[400px]" : "sm:h-[250px]",
+                )}
+              >
+                <PostCard post={post} showImage={showImage} />
+              </div>
+            );
+          })}
         </div>
 
         {visiblePosts.length === 0 && (
           <p className="mt-10 text-body text-ink/70">No posts in this category yet.</p>
         )}
 
-        {hasMore && (
+        {visiblePosts.length > 0 && (
           <div className="mt-10 flex justify-center">
             <Button
               type="button"
               variant="main"
+              disabled={!hasMore}
+              className="disabled:pointer-events-none disabled:opacity-40"
               onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
             >
               Load more
@@ -113,8 +129,8 @@ function FilterButton({
       onClick={onClick}
       aria-pressed={active}
       className={cx(
-        "text-label font-mono uppercase tracking-tight text-ink/70 hover:text-ink",
-        active && "text-ink underline underline-offset-4",
+        "shrink-0 whitespace-nowrap text-label font-mono uppercase tracking-tight text-ink/70 hover:text-ink",
+        active && "text-ink font-bold underline underline-offset-4",
       )}
     >
       {children}

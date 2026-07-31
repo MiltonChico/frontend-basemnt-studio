@@ -15,9 +15,9 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
 
   return (
   
-    <article className="relative mx-auto flex w-full max-w-[902px] flex-col gap-12 overflow-hidden rounded-2xl border border-line bg-ink-soft/80 pt-2 pr-2 pb-2 pl-4 backdrop-blur sm:h-[394px] sm:flex-row">
+    <article className="relative mx-auto flex w-full max-w-[902px] flex-col gap-4 overflow-hidden rounded-xl border border-line bg-ink-soft/55 p-4 backdrop-blur sm:h-[394px] sm:gap-12 sm:rounded-2xl sm:pt-2 sm:pr-2 sm:pb-2 sm:pl-4 sm:flex-row">
       {post.mainImage && (
-        <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-xl sm:h-full sm:w-[360px] sm:aspect-auto">
+        <div className="relative h-[110px] w-full shrink-0 overflow-hidden rounded-md sm:h-full sm:w-[360px] sm:rounded-xl">
           <Image
             src={urlFor(post.mainImage).width(720).height(720).url()}
             alt={post.mainImage.alt ?? post.title}
@@ -28,7 +28,7 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
           />
         </div>
       )}
-      <div className="flex flex-col justify-center gap-4 p-2 sm:w-[325px] sm:shrink-0">
+      <div className="flex flex-col justify-center gap-2 sm:w-[325px] sm:shrink-0 sm:gap-4 sm:p-2">
         <p className="text-caption font-mono text-muted-strong">
           <time dateTime={post.publishedAt}>{date}</time>
         </p>
@@ -42,7 +42,9 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
             ))}
           </div>
         )}
-        {post.description && <p className="text-body font-normal text-muted">{post.description}</p>}
+        {post.description && (
+          <p className="text-sm font-normal text-muted sm:text-body">{post.description}</p>
+        )}
         <Button
           href={`/blog/${post.slug}`}
           variant="secondaryAccent"

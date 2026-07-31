@@ -33,7 +33,15 @@ const toneStyles: Record<
   },
 };
 
-export function PostCard({ post, tone = "light" }: { post: PostSummary; tone?: Tone }) {
+export function PostCard({
+  post,
+  tone = "light",
+  showImage = true,
+}: {
+  post: PostSummary;
+  tone?: Tone;
+  showImage?: boolean;
+}) {
   const date = new Date(post.publishedAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -51,8 +59,8 @@ export function PostCard({ post, tone = "light" }: { post: PostSummary; tone?: T
       )}
     >
       <div className="flex w-full flex-col items-start gap-6">
-        <div className="relative h-[137px] w-full shrink-0 overflow-hidden rounded-md bg-ink-soft">
-          {post.mainImage && (
+        {showImage && post.mainImage && (
+          <div className="relative h-[137px] w-full shrink-0 overflow-hidden rounded-md bg-ink-soft">
             <Image
               src={urlFor(post.mainImage).width(436).height(137).url()}
               alt={post.mainImage.alt ?? post.title}
@@ -60,8 +68,8 @@ export function PostCard({ post, tone = "light" }: { post: PostSummary; tone?: T
               sizes="436px"
               className="object-cover"
             />
-          )}
-        </div>
+          </div>
+        )}
         <div className="flex flex-col items-start gap-4">
           <p className={cx("text-caption font-mono", s.date)}>
             <time dateTime={post.publishedAt}>{date}</time>

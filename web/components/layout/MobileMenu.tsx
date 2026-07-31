@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { NavLinks } from "./NavLinks";
 import type { NavLink } from "@/lib/sanity/types";
 
@@ -27,11 +28,9 @@ export function MobileMenu({ navLinks }: { navLinks: NavLink[] }) {
         aria-expanded={open}
         aria-controls="mobile-nav"
         aria-label={open ? "Close menu" : "Open menu"}
-        className="flex flex-col gap-1.5 p-2"
+        className="p-2"
       >
-        <span className="h-0.5 w-6 bg-cream" />
-        <span className="h-0.5 w-6 bg-cream" />
-        <span className="h-0.5 w-6 bg-cream" />
+        <Image src="/hamburger.svg" alt="" aria-hidden="true" width={40} height={11} />
       </button>
 
       <dialog
@@ -42,7 +41,7 @@ export function MobileMenu({ navLinks }: { navLinks: NavLink[] }) {
           if (event.target === dialogRef.current) dialogRef.current?.close();
         }}
         aria-label="Site menu"
-        className="m-0 h-full max-h-none w-full max-w-none border-none bg-ink p-0 text-cream backdrop:bg-ink/90"
+        className="fixed inset-0 m-0 h-dvh max-h-none w-dvw max-w-none border-none bg-ink p-0 text-cream backdrop:bg-ink/90"
       >
         <nav
           ref={navRef}
