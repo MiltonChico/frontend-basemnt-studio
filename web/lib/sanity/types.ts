@@ -23,6 +23,7 @@ export type SocialLink = {
 export type SiteSettings = {
   title?: string;
   blogHero?: string;
+  postGridHeading?: string;
   navLinks?: NavLink[] | null;
   contactEmail?: string;
   footerColumns?: FooterColumn[] | null;

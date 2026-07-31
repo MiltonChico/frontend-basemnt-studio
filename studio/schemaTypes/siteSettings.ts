@@ -18,6 +18,12 @@ export const siteSettings = defineType({
       description: 'e.g. "Research, insights, and the science behind building brands & websites."',
     }),
     defineField({
+      name: 'postGridHeading',
+      title: 'Post grid heading',
+      type: 'string',
+      description: 'Heading above the blog post grid on the homepage, e.g. "Knowledge Is Meant to Be Shared".',
+    }),
+    defineField({
       name: 'navLinks',
       title: 'Navigation links',
       type: 'array',

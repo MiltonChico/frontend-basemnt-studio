@@ -11,3 +11,5 @@ node_modules/
 # Editor
 .vscode/*
 !.vscode/extensions.json
+
+.vercel

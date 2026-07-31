@@ -17,6 +17,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
     `*[_type == "siteSettings"][0]{
       title,
       blogHero,
+      postGridHeading,
       navLinks,
       contactEmail,
       footerColumns,
@@ -95,7 +96,7 @@ export async function getRelatedPosts(
 ): Promise<PostSummary[]> {
   if (categoryIds.length === 0) return [];
   return client.fetch(
-    `*[_type == "post" && _id != $currentId && count((categories[]->_id)[@ in $categoryIds]) > 0] | order(publishedAt desc)[0...3]{${postSummaryProjection}}`,
+    `*[_type == "post" && _id != $currentId && count((categories[]->_id)[@ in $categoryIds]) > 0] | order(publishedAt desc)[0...6]{${postSummaryProjection}}`,
     { currentId, categoryIds },
     { next: { tags: ["post"], revalidate: 3600 } },
   );

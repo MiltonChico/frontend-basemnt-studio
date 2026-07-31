@@ -27,7 +27,7 @@ export function NavLinks({
             aria-current={isActive ? "page" : undefined}
             className={
               className ??
-              "text-body font-semibold text-muted-strong hover:text-accent aria-[current=page]:text-accent"
+              "text-body font-semibold text-cream/70 hover:text-accent aria-[current=page]:text-accent"
             }
           >
             {link.label}

@@ -1,5 +1,10 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { urlFor } from "@/lib/sanity/image";
 import { Tag } from "@/components/ui/Tag";
 import { Text } from "@/components/ui/Text";
@@ -7,17 +12,33 @@ import { Container } from "@/components/layout/Container";
 import type { Post } from "@/lib/sanity/types";
 
 export function PostHeader({ post }: { post: Post }) {
+  const containerRef = useRef<HTMLElement>(null);
   const date = new Date(post.publishedAt).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
 
+  useGSAP(
+    () => {
+      gsap.from("[data-header-in]", {
+        x: -32,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.12,
+      });
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <header className="bg-ink pb-12 pt-8 text-cream">
+    <header ref={containerRef} className="bg-ink pb-12 pt-8 text-cream">
       <Container>
         <Link
           href="/"
+          data-header-in
           className="inline-flex items-center gap-2 text-label font-mono uppercase tracking-tight text-cream hover:text-accent"
         >
           ← Go back
@@ -26,9 +47,11 @@ export function PostHeader({ post }: { post: Post }) {
         <div className="mt-4 border-t border-line" />
 
         <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
-          <h1 className="text-h2 font-semibold">{post.title}</h1>
-       
-          <div className="flex flex-col gap-4">
+          <h1 data-header-in className="text-h2 font-semibold">
+            {post.title}
+          </h1>
+
+          <div data-header-in className="flex flex-col gap-4">
             {post.description && (
               <Text as="p" variant="h3" weight="normal" tone="cream">
                 {post.description}
@@ -42,8 +65,8 @@ export function PostHeader({ post }: { post: Post }) {
           </div>
         </div>
 
-     
-        <div className="mt-36 grid grid-cols-1 gap-8 md:grid-cols-2">
+
+        <div className="mt-36 grid grid-cols-1 gap-8 md:grid-cols-2" data-header-in>
           <div aria-hidden="true" className="hidden md:block" />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <Text

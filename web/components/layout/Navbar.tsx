@@ -30,8 +30,8 @@ export function Navbar({
     <header className="sticky top-0 z-40 pt-4">
       <Container>
         <div className="navbar-pill relative flex h-[52px] items-center justify-between rounded-[10px] pt-2 pr-[7.5px] pb-2 pl-4">
-          <Link href="/" className="block h-[46px] w-[123px] shrink-0">
-            <AnimatedLogo title={title} />
+          <Link href="/" aria-label={title} className="block h-[46px] w-[123px] shrink-0">
+            <AnimatedLogo />
           </Link>
 
           <nav aria-label="Primary" className="hidden md:flex md:items-center md:gap-8">

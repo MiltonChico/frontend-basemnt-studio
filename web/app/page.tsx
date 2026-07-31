@@ -25,7 +25,7 @@ export default async function Home() {
         <PostGrid
           posts={restPosts}
           categories={categories}
-          heading="Knowledge Is Meant to Be Shared"
+          heading={siteSettings?.postGridHeading ?? "Knowledge Is Meant to Be Shared"}
         />
       </Suspense>
     </>

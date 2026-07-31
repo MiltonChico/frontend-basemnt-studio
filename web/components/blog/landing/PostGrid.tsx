@@ -191,7 +191,7 @@ function FilterButton({
       onClick={onClick}
       aria-pressed={active}
       className={cx(
-        "shrink-0 whitespace-nowrap text-label font-mono uppercase tracking-tight text-ink/70 hover:text-ink",
+        "cursor-pointer shrink-0 whitespace-nowrap text-label font-mono uppercase tracking-tight text-ink/70 hover:text-ink",
         active && "text-ink font-bold underline underline-offset-4",
       )}
     >

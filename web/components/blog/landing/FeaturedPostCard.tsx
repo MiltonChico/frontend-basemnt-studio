@@ -11,6 +11,7 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
   const ctaLabel = post.ctaLabel ?? "Read full blog post";
 

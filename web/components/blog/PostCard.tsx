@@ -47,6 +47,7 @@ export function PostCard({
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
   const ctaLabel = post.ctaLabel ?? "Read more";
   const s = toneStyles[tone];
