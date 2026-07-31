@@ -5,6 +5,10 @@
     "studio",
     "web"
   ],
+  "overrides": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
   "scripts": {
     "dev:studio": "npm run dev --workspace studio",
     "dev:web": "npm run dev --workspace web",
