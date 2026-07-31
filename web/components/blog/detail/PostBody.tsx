@@ -2,6 +2,7 @@ import Image from "next/image";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import { urlFor } from "@/lib/sanity/image";
+import { Text } from "@/components/ui/Text";
 import type { PullQuote } from "@/lib/sanity/types";
 
 const components: PortableTextComponents = {
@@ -12,7 +13,11 @@ const components: PortableTextComponents = {
     h3: ({ children }) => (
       <h3 className="mt-8 text-h3 font-semibold">{children}</h3>
     ),
-    normal: ({ children }) => <p className="mt-4 text-body leading-relaxed">{children}</p>,
+    normal: ({ children }) => (
+      <Text as="p" variant="prose" className="mt-4">
+        {children}
+      </Text>
+    ),
   },
   marks: {
     link: ({ value, children }) => (
@@ -38,7 +43,9 @@ const components: PortableTextComponents = {
     ),
     pullQuote: ({ value }) => (
       <blockquote className="my-10 border-l-2 border-accent pl-6">
-        <p className="text-2xl font-semibold leading-snug">“{value.quote}”</p>
+        <Text as="p" variant="quote">
+          “{value.quote}”
+        </Text>
         {(value.attributionName || value.attributionRole) && (
           <footer className="mt-3 text-label font-mono text-muted-strong">
             {value.attributionName}

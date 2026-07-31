@@ -2,6 +2,7 @@ import Image from "next/image";
 import { urlFor } from "@/lib/sanity/image";
 import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
+import { Text } from "@/components/ui/Text";
 import type { PostSummary } from "@/lib/sanity/types";
 
 
@@ -29,9 +30,9 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
         </div>
       )}
       <div className="flex flex-col justify-center gap-2 sm:w-[325px] sm:shrink-0 sm:gap-4 sm:p-2">
-        <p className="text-caption font-mono text-muted-strong">
+        <Text as="p" variant="caption" tone="mutedStrong" className="font-mono">
           <time dateTime={post.publishedAt}>{date}</time>
-        </p>
+        </Text>
         <h2 className="text-h2 font-semibold leading-snug">{post.title}</h2>
         {post.categories && post.categories.length > 0 && (
           <div className="flex flex-wrap gap-1">
@@ -43,7 +44,9 @@ export function FeaturedPostCard({ post }: { post: PostSummary }) {
           </div>
         )}
         {post.description && (
-          <p className="text-sm font-normal text-muted sm:text-body">{post.description}</p>
+          <Text as="p" variant="bodyResponsive" tone="muted">
+            {post.description}
+          </Text>
         )}
         <Button
           href={`/blog/${post.slug}`}

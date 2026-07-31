@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { Text } from "@/components/ui/Text";
 import type { PostSummary } from "@/lib/sanity/types";
 
 function shortTitle(title: string) {
@@ -27,18 +28,18 @@ export function PostPagination({
             >
               Previous
             </Button>
-            <span className="text-label font-mono uppercase tracking-tight text-cream">
+            <Text variant="label" tone="cream">
               {shortTitle(previous.title)}
-            </span>
+            </Text>
           </div>
         ) : (
           <span />
         )}
         {next ? (
           <div className="flex items-center gap-4">
-            <span className="text-label font-mono uppercase tracking-tight text-cream">
+            <Text variant="label" tone="cream">
               {shortTitle(next.title)}
-            </span>
+            </Text>
             <Button
               href={`/blog/${next.slug}`}
               variant="secondaryGrey"

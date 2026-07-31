@@ -2,6 +2,7 @@ import Image from "next/image";
 import { urlFor } from "@/lib/sanity/image";
 import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
+import { Text } from "@/components/ui/Text";
 import { cx } from "@/lib/utils";
 import type { PostSummary } from "@/lib/sanity/types";
 
@@ -12,7 +13,7 @@ const toneStyles: Record<
   {
     card: string;
     padding: string;
-    date: string;
+    dateTone: "ink70" | "mutedStrong";
     tag: string;
     button: "secondaryLight" | "secondaryAccent";
   }
@@ -20,14 +21,14 @@ const toneStyles: Record<
   light: {
     card: "bg-[rgba(252,252,252,0.25)] text-ink",
     padding: "p-6",
-    date: "text-ink/70",
+    dateTone: "ink70",
     tag: "bg-[#e6e6e6] text-ink/70",
     button: "secondaryLight",
   },
   dark: {
     card: "border border-line bg-ink-soft text-cream",
     padding: "p-4",
-    date: "text-muted-strong",
+    dateTone: "mutedStrong",
     tag: "bg-[#2e2e2e] text-[#c4c4c4]",
     button: "secondaryAccent",
   },
@@ -74,9 +75,9 @@ export function PostCard({
           </div>
         )}
         <div className="flex flex-col items-start gap-4">
-          <p className={cx("text-caption font-mono", s.date)}>
+          <Text as="p" variant="caption" tone={s.dateTone} className="font-mono">
             <time dateTime={post.publishedAt}>{date}</time>
-          </p>
+          </Text>
           <h3 className="text-h3 font-semibold">{post.title}</h3>
           {post.categories && post.categories.length > 0 && (
             <div className="flex flex-wrap gap-1">

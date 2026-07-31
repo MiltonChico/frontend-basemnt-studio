@@ -1,4 +1,4 @@
-import { PostCard } from "./PostCard";
+import { PostCard } from "../PostCard";
 import { Container } from "@/components/layout/Container";
 import { HorizontalScroller } from "./HorizontalScroller";
 import type { PostSummary } from "@/lib/sanity/types";

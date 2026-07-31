@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { MobileMenu } from "./MobileMenu";
 import { ContactModal } from "./ContactModal";
 import { NavLinks } from "./NavLinks";
 import { Container } from "./Container";
+import { AnimatedLogo } from "./AnimatedLogo";
 import type { NavLink } from "@/lib/sanity/types";
 
 const DEFAULT_NAV_LINKS: NavLink[] = [
@@ -31,7 +31,7 @@ export function Navbar({
       <Container>
         <div className="navbar-pill relative flex h-[52px] items-center justify-between rounded-[10px] pt-2 pr-[7.5px] pb-2 pl-4">
           <Link href="/" className="block h-[46px] w-[123px] shrink-0">
-            <Image src="/logo.svg" alt={title} width={123} height={46} priority />
+            <AnimatedLogo title={title} />
           </Link>
 
           <nav aria-label="Primary" className="hidden md:flex md:items-center md:gap-8">

@@ -4,8 +4,9 @@ import { useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { PostCard } from "./PostCard";
+import { PostCard } from "../PostCard";
 import { Button } from "@/components/ui/Button";
+import { Text } from "@/components/ui/Text";
 import { Container } from "@/components/layout/Container";
 import type { Category, PostSummary } from "@/lib/sanity/types";
 import { cx } from "@/lib/utils";
@@ -151,7 +152,9 @@ export function PostGrid({
         </div>
 
         {visiblePosts.length === 0 && (
-          <p className="mt-10 text-body text-ink/70">No posts in this category yet.</p>
+          <Text as="p" variant="body" tone="ink70" className="mt-10">
+            No posts in this category yet.
+          </Text>
         )}
 
         {visiblePosts.length > 0 && (

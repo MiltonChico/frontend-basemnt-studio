@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { BlogHero } from "@/components/blog/BlogHero";
-import { PostGrid } from "@/components/blog/PostGrid";
+import { BlogHero } from "@/components/blog/landing/BlogHero";
+import { PostGrid } from "@/components/blog/landing/PostGrid";
 import { getCategories, getPosts, getSiteSettings } from "@/lib/sanity/queries";
 
 export default async function Home() {

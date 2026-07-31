@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/lib/sanity/image";
 import { Tag } from "@/components/ui/Tag";
+import { Text } from "@/components/ui/Text";
 import { Container } from "@/components/layout/Container";
 import type { Post } from "@/lib/sanity/types";
 
@@ -29,9 +30,15 @@ export function PostHeader({ post }: { post: Post }) {
        
           <div className="flex flex-col gap-4">
             {post.description && (
-              <p className="text-h3">{post.description}</p>
+              <Text as="p" variant="h3" weight="normal" tone="cream">
+                {post.description}
+              </Text>
             )}
-            {post.intro && <p className="text-body text-muted">{post.intro}</p>}
+            {post.intro && (
+              <Text as="p" variant="body" tone="muted">
+                {post.intro}
+              </Text>
+            )}
           </div>
         </div>
 
@@ -39,7 +46,13 @@ export function PostHeader({ post }: { post: Post }) {
         <div className="mt-36 grid grid-cols-1 gap-8 md:grid-cols-2">
           <div aria-hidden="true" className="hidden md:block" />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="flex items-center gap-2 text-caption font-semibold leading-none text-cream">
+            <Text
+              as="p"
+              variant="caption"
+              weight="semibold"
+              tone="cream"
+              className="flex items-center gap-2 leading-none"
+            >
               <span>{date}</span>
               {post.authors && post.authors.length > 0 && (
                 <>
@@ -47,7 +60,7 @@ export function PostHeader({ post }: { post: Post }) {
                   <span>{post.authors.map((author) => author.name).join(", ")}</span>
                 </>
               )}
-            </p>
+            </Text>
             {post.categories && post.categories.length > 0 && (
               <div className="flex flex-wrap gap-1">
                 {post.categories.map((category) => (

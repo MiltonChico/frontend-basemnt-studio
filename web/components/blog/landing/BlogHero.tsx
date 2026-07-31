@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { FeaturedPostCard } from "@/components/blog/FeaturedPostCard";
+import { FeaturedPostCard } from "@/components/blog/landing/FeaturedPostCard";
 import { Container } from "@/components/layout/Container";
 import type { PostSummary } from "@/lib/sanity/types";
 

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PostHeader } from "@/components/blog/PostHeader";
-import { PostBody } from "@/components/blog/PostBody";
-import { PostPagination } from "@/components/blog/PostPagination";
-import { RelatedPosts } from "@/components/blog/RelatedPosts";
+import { PostHeader } from "@/components/blog/detail/PostHeader";
+import { PostBody } from "@/components/blog/detail/PostBody";
+import { PostPagination } from "@/components/blog/detail/PostPagination";
+import { RelatedPosts } from "@/components/blog/detail/RelatedPosts";
 import {
   getAdjacentPosts,
   getPostBySlug,

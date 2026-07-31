@@ -34,7 +34,7 @@ const compactVariants: Record<"secondaryAccent" | "secondaryLight" | "secondaryG
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-mono uppercase transition-colors duration-150";
+  "inline-flex items-center justify-center gap-2 font-mono uppercase transition-colors duration-150 cursor-pointer disabled:cursor-not-allowed";
 
 export function buttonClassName(
   variant: Variant = "main",
